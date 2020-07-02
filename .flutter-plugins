@@ -1,4 +1,7 @@
 # This is a generated file; do not edit or check into version control.
 flutter_secure_storage=/Users/suffieldacademy/.pub-cache/hosted/pub.dartlang.org/flutter_secure_storage-3.2.1+1/
 flutter_webview_plugin=/Users/suffieldacademy/.pub-cache/hosted/pub.dartlang.org/flutter_webview_plugin-0.3.0+2/
+path_provider=/Users/suffieldacademy/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.11/
+path_provider_linux=/Users/suffieldacademy/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
+path_provider_macos=/Users/suffieldacademy/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+3/
 shared_preferences=/Users/suffieldacademy/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.3+1/
