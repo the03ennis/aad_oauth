@@ -8,7 +8,6 @@ import 'package:flutter/foundation.dart'
 class AuthStorage {
   static AuthStorage shared = new AuthStorage();
   AuthStorage storageInstance;
-  FlutterSecureStorage _secureStorage = FlutterSecureStorage();
   String _tokenIdentifier;
 
   ///Modified this constructor: if the program is running on web, it will return
@@ -40,15 +39,31 @@ class AuthStorage {
   }
 }
 
-class WebStorageInstance extends AuthStorage {}
+class WebStorageInstance extends AuthStorage {
+  //Basic constructor for the web secure storage instance.
+  WebStorageInstance({String tokenIdentifier = "Token"}) {
+    _tokenIdentifier = tokenIdentifier;
+  }
+}
 
+///This takes the code written by the original authors and moves it into its own class.
+///This will be instantiated when storage is needed on a non-web platform, ex iOS, Android
 class FSStorageInstance extends AuthStorage {
+  FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+
+  //Basic constructor for the flutter secure storage instance
+  FSStorageInstance({String tokenIdentifier = "Token"}) {
+    _tokenIdentifier = tokenIdentifier;
+  }
+
+  @override
   Future<void> saveTokenToCache(Token token) async {
     var data = Token.toJsonMap(token);
     var json = Convert.jsonEncode(data);
     await _secureStorage.write(key: _tokenIdentifier, value: json);
   }
 
+  @override
   Future<T> loadTokenToCache<T extends Token>() async {
     var json = await _secureStorage.read(key: _tokenIdentifier);
     if (json == null) return null;
@@ -61,9 +76,7 @@ class FSStorageInstance extends AuthStorage {
     }
   }
 
-  Token _getTokenFromMap<T extends Token>(Map<String, dynamic> data) =>
-      Token.fromJson(data);
-
+  @override
   Future clear() async {
     _secureStorage.delete(key: _tokenIdentifier);
   }
