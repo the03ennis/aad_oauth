@@ -41,10 +41,13 @@ class AuthStorage {
   }
 }
 
-class WebStorageInstance extends AuthStorage {
+class WebStorageInstance implements AuthStorage {
+  AuthStorage storageInstance;
+  String _tokenIdentifier;
   var authBox; //A Hive box for the storage of credentials
   //Basic constructor for the web secure storage instance.
   WebStorageInstance({String tokenIdentifier = "Token"}) {
+    storageInstance = this;
     //Initiates hive
     Hive.initFlutter();
     _tokenIdentifier = tokenIdentifier;
@@ -73,6 +76,10 @@ class WebStorageInstance extends AuthStorage {
   }
 
   @override
+  Token _getTokenFromMap<T extends Token>(Map<String, dynamic> data) =>
+      Token.fromJson(data);
+
+  @override
   Future clear() async {
     authBox.delete(_tokenIdentifier);
   }
@@ -80,11 +87,14 @@ class WebStorageInstance extends AuthStorage {
 
 ///This takes the code written by the original authors and moves it into its own class.
 ///This will be instantiated when storage is needed on a non-web platform, ex iOS, Android
-class FSStorageInstance extends AuthStorage {
+class FSStorageInstance implements AuthStorage {
+  AuthStorage storageInstance;
+  String _tokenIdentifier;
   FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 
   //Basic constructor for the flutter secure storage instance
   FSStorageInstance({String tokenIdentifier = "Token"}) {
+    storageInstance = this;
     _tokenIdentifier = tokenIdentifier;
   }
 
@@ -107,6 +117,10 @@ class FSStorageInstance extends AuthStorage {
       return null;
     }
   }
+
+  @override
+  Token _getTokenFromMap<T extends Token>(Map<String, dynamic> data) =>
+      Token.fromJson(data);
 
   @override
   Future clear() async {
