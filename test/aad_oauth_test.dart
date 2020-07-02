@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:aad_oauth/aad_oauth.dart';
-import 'package:aad_oauth/model/config.dart';
+import 'package:aad_oauth_web/aad_oauth_web.dart';
+import 'package:aad_oauth_web/model/config.dart';
 
 void main() {
   test('adds one to input values', () {

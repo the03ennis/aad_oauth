@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:aad_oauth/model/token.dart';
+import 'package:aad_oauth_web/model/token.dart';
 import "dart:convert" as Convert;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart'

@@ -1,8 +1,6 @@
-
-import 'package:aad_oauth/model/config.dart';
+import 'package:aad_oauth_web/model/config.dart';
 
 class AuthorizationRequest {
-
   String url;
   String redirectUrl;
   Map<String, String> parameters;
@@ -21,7 +19,7 @@ class AuthorizationRequest {
       "scope": config.scope
     };
 
-    if(config.isB2C){
+    if (config.isB2C) {
       parameters.addAll({
         "p": config.userFlow,
         "nonce": config.nonce,

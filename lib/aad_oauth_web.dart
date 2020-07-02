@@ -1,4 +1,4 @@
-library aad_oauth;
+library aad_oauth_web;
 
 import 'model/config.dart';
 import 'package:flutter/material.dart';
@@ -29,20 +29,17 @@ class AadOAuth {
 
   Future<void> login() async {
     await _removeOldTokenOnFirstLogin();
-    if (!Token.tokenIsValid(_token) )
-      await _performAuthorization();
+    if (!Token.tokenIsValid(_token)) await _performAuthorization();
   }
 
   Future<String> getAccessToken() async {
-    if (!Token.tokenIsValid(_token) )
-      await _performAuthorization();
+    if (!Token.tokenIsValid(_token)) await _performAuthorization();
 
     return _token.accessToken;
   }
 
   Future<String> getIdToken() async {
-    if (!Token.tokenIsValid(_token) )
-      await _performAuthorization();
+    if (!Token.tokenIsValid(_token)) await _performAuthorization();
 
     return _token.idToken;
   }

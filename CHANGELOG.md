@@ -1,7 +1,7 @@
 ## [0.1.9] - 20200529
 
-- Added id_token support https://github.com/Earlybyte/aad_oauth/pull/36
-- Added support to AAD B2C https://github.com/Earlybyte/aad_oauth/pull/35
+- Added id_token support https://github.com/Earlybyte/aad_oauth_web/pull/36
+- Added support to AAD B2C https://github.com/Earlybyte/aad_oauth_web/pull/35
 
 ## [0.1.8] - 20200203
 
@@ -10,8 +10,8 @@
 
 ## [0.1.7] - 20190430
 
-- Expose Redirect URL property in config.dart file to public https://github.com/Earlybyte/aad_oauth/pull/9
-- Expose webview rect area to public for customization https://github.com/Earlybyte/aad_oauth/pull/12
+- Expose Redirect URL property in config.dart file to public https://github.com/Earlybyte/aad_oauth_web/pull/9
+- Expose webview rect area to public for customization https://github.com/Earlybyte/aad_oauth_web/pull/12
 
 ## [0.1.6] - 20190419
 
@@ -19,8 +19,8 @@
 
 ## [0.1.5] - 20190413
 
-- Fix Token expiration issue https://github.com/Earlybyte/aad_oauth/issues/5
-- Remove old token on iOS after fresh install https://github.com/Earlybyte/aad_oauth/issues/3
+- Fix Token expiration issue https://github.com/Earlybyte/aad_oauth_web/issues/5
+- Remove old token on iOS after fresh install https://github.com/Earlybyte/aad_oauth_web/issues/3
 
 ## [0.1.4] - 20190325
 
