@@ -57,6 +57,7 @@ class WebStorageInstance implements AuthStorage {
 
   @override
   Future<void> saveTokenToCache(Token token) async {
+    authBox = await Hive.openBox('authBox');
     var data = Token.toJsonMap(token);
     var json = Convert.jsonEncode(data);
     await authBox.put(_tokenIdentifier, json);
@@ -64,6 +65,7 @@ class WebStorageInstance implements AuthStorage {
 
   @override
   Future<T> loadTokenToCache<T extends Token>() async {
+    authBox = await Hive.openBox('authBox');
     var json = await authBox.get(_tokenIdentifier);
     if (json == null) return null;
     try {
@@ -81,6 +83,7 @@ class WebStorageInstance implements AuthStorage {
 
   @override
   Future clear() async {
+    authBox = await Hive.openBox('authBox');
     authBox.delete(_tokenIdentifier);
   }
 }
