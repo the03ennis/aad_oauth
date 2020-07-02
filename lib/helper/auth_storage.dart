@@ -4,6 +4,8 @@ import "dart:convert" as Convert;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart'
     show kIsWeb; //Will be used to determine if web storage is necessary
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AuthStorage {
   static AuthStorage shared = new AuthStorage();
@@ -40,9 +42,39 @@ class AuthStorage {
 }
 
 class WebStorageInstance extends AuthStorage {
+  var authBox; //A Hive box for the storage of credentials
   //Basic constructor for the web secure storage instance.
   WebStorageInstance({String tokenIdentifier = "Token"}) {
+    //Initiates hive
+    Hive.initFlutter();
     _tokenIdentifier = tokenIdentifier;
+    //Opens the box
+    authBox = Hive.openBox('authBox');
+  }
+
+  @override
+  Future<void> saveTokenToCache(Token token) async {
+    var data = Token.toJsonMap(token);
+    var json = Convert.jsonEncode(data);
+    await authBox.put(_tokenIdentifier, json);
+  }
+
+  @override
+  Future<T> loadTokenToCache<T extends Token>() async {
+    var json = await authBox.get(_tokenIdentifier);
+    if (json == null) return null;
+    try {
+      var data = Convert.jsonDecode(json);
+      return _getTokenFromMap<T>(data);
+    } catch (exception) {
+      print(exception);
+      return null;
+    }
+  }
+
+  @override
+  Future clear() async {
+    authBox.delete(_tokenIdentifier);
   }
 }
 
