@@ -5,13 +5,13 @@ import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
 import 'request/authorization_request.dart';
 import 'model/config.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/foundation.dart'
     show kIsWeb; //Will be used to determine if iframe is necessary
 
 class RequestCode {
   final StreamController<String> _onCodeListener = new StreamController();
-  final FlutterWebviewPlugin _webView = new FlutterWebviewPlugin();
+  final WebView _webView = new WebView();
   final Config _config;
   RequestCode requestCodeInstance;
 
