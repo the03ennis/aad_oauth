@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'request/authorization_request.dart';
 import 'model/config.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:flutter/foundation.dart'
+    show kIsWeb; //Will be used to determine if iframe is necessary
 
 class RequestCode {
   AuthorizationRequest _authorizationRequest;
@@ -14,6 +16,11 @@ class RequestCode {
 
   RequestCode(Config config) {
     _authorizationRequest = new AuthorizationRequest(config);
+    if (kIsWeb) {
+      this.requestCodeInstance = new WebRequestCode(config);
+    } else {
+      this.requestCodeInstance = new MobileRequestCode(config);
+    }
   }
 
   Future<String> requestCode() async {
